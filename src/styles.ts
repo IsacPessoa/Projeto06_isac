@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
-const colors = {
+export const colors = {
   firstOrange: '#E66767',
   secondOrange: '#FFF8F2',
   white: '#FFFFFF',
@@ -13,6 +13,7 @@ export const GlobalCss = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: Roboto, sans-serif;
+    text-decoration: none;
   }
 
   body {
