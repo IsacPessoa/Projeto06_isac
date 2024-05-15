@@ -4,7 +4,7 @@ export const colors = {
   firstOrange: '#E66767',
   secondOrange: '#FFF8F2',
   white: '#FFFFFF',
-  beige: '#FFF8F2'
+  beige: '#FFEBD9'
 }
 
 export const GlobalCss = createGlobalStyle`
@@ -17,7 +17,7 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    background-color: ${colors.beige};
+    background-color: ${colors.secondOrange};
     color: ${colors.firstOrange};
   }
 `

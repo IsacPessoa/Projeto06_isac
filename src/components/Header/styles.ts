@@ -25,5 +25,5 @@ export const Title = styled.h1`
   margin-bottom: 40px;
   margin-top: 260px;
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 900;
 `
