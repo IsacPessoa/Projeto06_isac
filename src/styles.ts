@@ -20,4 +20,10 @@ export const GlobalCss = createGlobalStyle`
     background-color: ${colors.secondOrange};
     color: ${colors.firstOrange};
   }
+
+  .container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+  }
 `

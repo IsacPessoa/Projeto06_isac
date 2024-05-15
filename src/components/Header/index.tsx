@@ -1,7 +1,6 @@
 import { HeaderBar, Image, Title } from './styles'
 
 import logo from '../../assets/images/logo.svg'
-import Button from '../Button'
 
 const Header = () => (
   <HeaderBar>

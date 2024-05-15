@@ -16,12 +16,10 @@ export const ButtonContainer = styled.button`
 `
 
 export const ButtonLink = styled(Link)`
-  color: ${colors.firstOrange};
-  background-color: ${colors.beige};
-  font-size: 14px;
+  background-color: ${colors.firstOrange};
+  color: ${colors.beige};
+  font-size: '14px';
   font-weight: bold;
-  padding: 8px 0px;
-  aligin-items: center;
-  justify-content: center;
-  border: none;
+  padding: 4px 6px;
+  display: inline-block;
 `
