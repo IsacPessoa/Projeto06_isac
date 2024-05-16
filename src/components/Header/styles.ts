@@ -40,7 +40,9 @@ export const Image = styled.img`
   margin-bottom: 260px;
 `
 
-export const ImageSecondary = styled.img``
+export const ImageSecondary = styled.img`
+  margin-left: 24px;
+`
 
 export const Title = styled.h1`
   text-align: center;

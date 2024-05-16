@@ -4,6 +4,7 @@ import Prato from '../../models/Prato'
 
 import sushi from '../../assets/images/sushi.png'
 import pasta from '../../assets/images/pasta.png'
+import Footer from '../../components/Footer'
 
 const pratos: Prato[] = [
   {
@@ -68,6 +69,7 @@ const Home = () => (
     <div className="container">
       <ProductList type="first" pratos={pratos} />
     </div>
+    <Footer />
   </>
 )
 

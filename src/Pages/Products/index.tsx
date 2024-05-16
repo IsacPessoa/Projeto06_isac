@@ -4,6 +4,7 @@ import Prato from '../../models/Prato'
 
 import pizza from '../../assets/images/pizza.png'
 import Banner from '../../components/Banner'
+import Footer from '../../components/Footer'
 
 const pratos: Prato[] = [
   {
@@ -69,6 +70,7 @@ const Home = () => (
     <div className="container">
       <ProductList type="secondary" pratos={pratos} />
     </div>
+    <Footer />
   </>
 )
 
