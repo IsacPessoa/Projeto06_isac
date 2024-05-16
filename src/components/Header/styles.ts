@@ -15,10 +15,32 @@ export const HeaderBar = styled.header`
   align-items: center;
 `
 
+export const HeaderBarSecondary = styled.header`
+  position: relative;
+  background-color: ${colors.secondOrange};
+  background-image: url(${backgroundImage});
+  width: 100%;
+  height: 185px;
+  margin: 0 auto;
+  font-size: 18px;
+  font-weight: 900;
+  align-items: center;
+  display: flex;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: ;
+  }
+`
+
 export const Image = styled.img`
   position: absolute;
   margin-bottom: 260px;
 `
+
+export const ImageSecondary = styled.img``
 
 export const Title = styled.h1`
   text-align: center;
