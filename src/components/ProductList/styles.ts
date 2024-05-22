@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { colors } from '../../styles'
+import { ButtonContainer } from '../Button/styles'
 
 export const Container = styled.div`
   padding: 32px 0;
