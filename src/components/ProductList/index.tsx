@@ -1,55 +1,56 @@
-import Prato from '../../models/Prato'
+import { Efood } from '../../Pages/Home'
 import Product from '../Product'
 import { Container, List, ListSecondary } from './styles'
 
-import Button from '../Button'
-import { useState } from 'react'
-
 export type Props = {
-  pratos: Prato[]
+  efood: Efood[]
   type: 'first' | 'secondary'
 }
 
-const ProductList = ({ pratos, type }: Props) => {
+const ProductList = ({ efood, type }: Props) => {
   if (type === 'first') {
     return (
       <Container>
         <List>
-          {pratos.map((prato) => (
+          {efood.map((efoodItem) => (
             <Product
-              key={prato.id}
-              title={prato.title}
-              description={prato.description}
-              image={prato.image}
-              nota={prato.nota}
-              origens={prato.origens}
+              key={efoodItem.id}
+              title={efoodItem.titulo}
+              description={efoodItem.descricao}
+              image={efoodItem.capa}
+              nota={efoodItem.avaliacao}
+              origens={efoodItem.tipo}
+              destaque={efoodItem.destacado}
               type="first"
             />
           ))}
         </List>
       </Container>
     )
-  }
-
-  return (
-    <>
+  } else {
+    return (
       <Container>
         <ListSecondary>
-          {pratos.map((prato) => (
-            <Product
-              key={prato.id}
-              title={prato.title}
-              description={prato.description}
-              image={prato.image}
-              nota={prato.nota}
-              origens={prato.origens}
-              type="secondary"
-            />
-          ))}
+          {efood.map((efoodItem) =>
+            efoodItem.cardapio.map((cardapioItem) => (
+              <Product
+                key={cardapioItem.id}
+                title={cardapioItem.nome}
+                description={cardapioItem.descricao}
+                image={cardapioItem.foto}
+                modalDescription={cardapioItem.descricao}
+                modalImage={cardapioItem.foto}
+                modalPorcao={cardapioItem.porcao}
+                modalPreco={cardapioItem.preco}
+                modalTitle={cardapioItem.nome}
+                type="secondary"
+              />
+            ))
+          )}
         </ListSecondary>
       </Container>
-    </>
-  )
+    )
+  }
 }
 
 export default ProductList

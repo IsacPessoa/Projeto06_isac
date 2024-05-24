@@ -4,11 +4,18 @@ import { TagContainer } from '../Tag/styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Card = styled.div`
-  background-color: ${colors.white};
   position: relative;
+  max-width: 472px;
 
   ${TagContainer} {
     margin-right: 8px;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
   }
 `
 
@@ -29,6 +36,13 @@ export const CardSecondary = styled.div`
     text-align: center;
     cursor: pointer;
   }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
 `
 
 export const Title = styled.h3`
@@ -43,11 +57,19 @@ export const Decription = styled.p`
 `
 
 export const AllDescription = styled.div`
+  background-color: ${colors.white};
   padding: 8px 8px;
   border-width: 0px, 1px, 1px, 1px;
   border-style: solid;
   border-color: transparent ${colors.firstOrange} ${colors.firstOrange}
     ${colors.firstOrange};
+`
+
+export const AllDescription2 = styled.div`
+  background-color: ${colors.firstOrange};
+  padding: 8px 8px;
+  width: 100%;
+  height: auto;
 `
 
 export const Nota = styled.div`
@@ -57,6 +79,7 @@ export const Nota = styled.div`
 
   img {
     margin-left: 8px;
+    height: 20px;
   }
 `
 
@@ -130,8 +153,8 @@ export const ModalContent = styled.div`
 
 export const ImagePrato = styled.img`
   max-width: 280px;
-  width: 100%;
   height: 280px;
+  width: 100%;
   margin-right: 24px;
 `
 

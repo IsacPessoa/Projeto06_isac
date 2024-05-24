@@ -11,35 +11,53 @@ import {
   Modal,
   ModalContent,
   ImagePrato,
-  Close
+  Close,
+  AllDescription2
 } from './styles'
 
 import estrela from '../../assets/images/estrela.svg'
 import Tag from '../Tag'
 import { useState } from 'react'
-import pizza from '../../assets/images/pizza.png'
 import close from '../../assets/images/close.png'
 
 type Props = {
   title: string
-  nota?: string
+  nota?: number
   description: string
-  origens: string[]
+  origens?: string
+  destaque?: boolean
   image: string
   type: 'first' | 'secondary'
+  modalTitle?: string
+  modalDescription?: string
+  modalPorcao?: string
+  modalPreco?: number
+  modalImage?: string
 }
 
-const Product = ({ title, description, origens, image, nota, type }: Props) => {
+const Product = ({
+  title,
+  description,
+  origens,
+  image,
+  nota,
+  type,
+  destaque,
+  modalTitle,
+  modalDescription,
+  modalImage,
+  modalPorcao,
+  modalPreco
+}: Props) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
-  if (type === 'first') {
+  if (type === 'first' && origens) {
     return (
       <Card>
         <img src={image} alt={title} />
         <Infos>
-          {origens.map((origem) => (
-            <Tag key={origem}>{origem}</Tag>
-          ))}
+          <Tag key={origens}>{origens}</Tag>
+          {destaque && <Tag key="destaque">Destaque</Tag>}
         </Infos>
         <AllDescription>
           <InitialBar>
@@ -50,7 +68,7 @@ const Product = ({ title, description, origens, image, nota, type }: Props) => {
             </Nota>
           </InitialBar>
           <Decription>{description}</Decription>
-          <Button to="/pratos" type="link" title="Saiba mais">
+          <Button to="/pratos" buttonType="link" title="Saiba mais">
             Saiba mais
           </Button>
         </AllDescription>
@@ -62,42 +80,33 @@ const Product = ({ title, description, origens, image, nota, type }: Props) => {
     <>
       <CardSecondary>
         <img src={image} alt={title} />
-        <AllDescription>
+        <AllDescription2>
           <Title>{title}</Title>
           {nota}
           <Decription>{description}</Decription>
           <Button
             onClick={() => setModalEstaAberto(true)}
             to="/pratos"
-            type="button"
+            buttonType="button"
             title="Saiba mais"
           >
             Mais detalhes
           </Button>
-        </AllDescription>
+        </AllDescription2>
       </CardSecondary>
+
       <Modal className={modalEstaAberto ? 'visivel' : ''}>
         <ModalContent className="container">
-          <ImagePrato src={pizza} alt="imagem do prato" />
+          <ImagePrato src={modalImage} alt="imagem do prato" />
           <div>
-            <h4>Pizza Marguerita</h4>
-            <p>
-              A pizza Margherita é uma pizza clássica da culinária italiana,
-              reconhecida por sua simplicidade e sabor inigualável. Ela é feita
-              com uma base de massa fina e crocante, coberta com molho de tomate
-              fresco, queijo mussarela de alta qualidade, manjericão fresco e
-              azeite de oliva extra-virgem. A combinação de sabores é perfeita,
-              com o molho de tomate suculento e ligeiramente ácido, o queijo
-              derretido e cremoso e as folhas de manjericão frescas, que
-              adicionam um toque de sabor herbáceo. É uma pizza simples, mas
-              deliciosa, que agrada a todos os paladares e é uma ótima opção
-              para qualquer ocasião.
-            </p>
+            <h4>{modalTitle}</h4>
+            <p>{modalDescription}</p>
             <span>
-              Serve: de 2 a 3 pessoas <br />
+              Serve: de {modalPorcao} <br />
             </span>
-            <Button type="button" title="adicionar ao carrinho">
-              Adicionar ao carrinho - R$ 60,90
+            <Button buttonType="button" title="adicionar ao carrinho">
+              Adicionar ao carrinho - R${' '}
+              {modalPreco !== undefined ? modalPreco.toString() : ''}0
             </Button>
           </div>
           <Close
