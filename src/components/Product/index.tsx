@@ -27,6 +27,7 @@ type Props = {
   origens?: string
   destaque?: boolean
   image: string
+  id?: number
   type: 'first' | 'secondary'
   modalTitle?: string
   modalDescription?: string
@@ -47,7 +48,8 @@ const Product = ({
   modalDescription,
   modalImage,
   modalPorcao,
-  modalPreco
+  modalPreco,
+  id
 }: Props) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
@@ -68,7 +70,7 @@ const Product = ({
             </Nota>
           </InitialBar>
           <Decription>{description}</Decription>
-          <Button to="/pratos" buttonType="link" title="Saiba mais">
+          <Button to={`/pratos/${id}`} buttonType="link" title="Saiba mais">
             Saiba mais
           </Button>
         </AllDescription>

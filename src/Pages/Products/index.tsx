@@ -5,22 +5,37 @@ import Banner from '../../components/Banner'
 import Footer from '../../components/Footer'
 import { Efood } from '../Home'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const Products = () => {
-  const [restaurantes, setRestaurantes] = useState<Efood[]>([])
+  // const [restaurantes, setRestaurantes] = useState<Efood[]>([])
+
+  const { id } = useParams()
+
+  const [prato, setPrato] = useState<Efood | null>(null)
 
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
       .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
+      .then((res) => setPrato(res))
+  }, [id])
+
+  if (!prato) {
+    return <h3>Carregando...</h3>
+  }
+
+  // useEffect(() => {
+  //   fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+  //     .then((res) => res.json())
+  //     .then((res) => setRestaurantes(res))
+  // }, [])
 
   return (
     <>
       <Header type="secondary" />
       <Banner />
       <div className="container">
-        <ProductList type="secondary" efood={restaurantes} />
+        <ProductList type="secondary" efood={prato ? [prato] : []} />
       </div>
       <Footer />
     </>

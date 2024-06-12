@@ -1,8 +1,6 @@
 import Header from '../../components/Header'
 import ProductList from '../../components/ProductList'
 
-import sushi from '../../assets/images/sushi.png'
-import pasta from '../../assets/images/pasta.png'
 import Footer from '../../components/Footer'
 import { useEffect, useState } from 'react'
 

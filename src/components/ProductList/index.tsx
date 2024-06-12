@@ -7,7 +7,7 @@ export type Props = {
   type: 'first' | 'secondary'
 }
 
-const ProductList = ({ efood, type }: Props) => {
+const ProductList = ({ efood = [], type }: Props) => {
   if (type === 'first') {
     return (
       <Container>
@@ -22,6 +22,7 @@ const ProductList = ({ efood, type }: Props) => {
               origens={efoodItem.tipo}
               destaque={efoodItem.destacado}
               type="first"
+              id={efoodItem.id}
             />
           ))}
         </List>
