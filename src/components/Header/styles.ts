@@ -33,6 +33,10 @@ export const HeaderBarSecondary = styled.header`
     align-items: center;
     margin-top: ;
   }
+
+  p {
+    cursor: pointer;
+  }
 `
 
 export const Image = styled.img`
@@ -42,6 +46,7 @@ export const Image = styled.img`
 
 export const ImageSecondary = styled.img`
   margin-left: 24px;
+  cursor: pointer;
 `
 
 export const Title = styled.h1`
