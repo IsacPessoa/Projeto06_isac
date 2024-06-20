@@ -5,6 +5,7 @@ import { GlobalCss } from './styles'
 import Home from './Pages/Home'
 import Products from './Pages/Products'
 import { store } from './store'
+import Cart from './components/Cart'
 
 const rotas = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ function App() {
   return (
     <Provider store={store}>
       <GlobalCss />
+      <Cart />
       <RouterProvider router={rotas} />
     </Provider>
   )
