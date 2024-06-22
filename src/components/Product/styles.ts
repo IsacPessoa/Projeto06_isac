@@ -120,6 +120,10 @@ export const Modal = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.73);
   }
+
+  ${ButtonContainer} {
+    cursor: pointer;
+  }
 `
 
 export const ModalContent = styled.div`
@@ -148,7 +152,6 @@ export const ModalContent = styled.div`
     margin-top: 16px;
     padding: 4px 8px;
     background-color: ${colors.beige};
-    cursor: pointer;
   }
 `
 
