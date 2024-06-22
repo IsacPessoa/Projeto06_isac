@@ -8,11 +8,22 @@ import {
 
 import logo from '../../assets/images/logo.svg'
 
+import { open } from '../../store/reducers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+
 type Props = {
   type: 'first' | 'secondary'
 }
 
 const Header = ({ type }: Props) => {
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+  const openCart = () => {
+    dispatch(open())
+  }
+
   if (type === 'first') {
     return (
       <HeaderBar>
@@ -29,7 +40,7 @@ const Header = ({ type }: Props) => {
       <div className="container">
         <p>Restaurantes</p>
         <ImageSecondary src={logo} alt="efood" />
-        <p>0 - Produto(s) no carrinho</p>
+        <p onClick={openCart}>{items.length} - Produto(s) no carrinho</p>
       </div>
     </HeaderBarSecondary>
   )
