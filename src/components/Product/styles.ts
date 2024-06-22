@@ -148,6 +148,7 @@ export const ModalContent = styled.div`
     margin-top: 16px;
     padding: 4px 8px;
     background-color: ${colors.beige};
+    cursor: pointer;
   }
 `
 
