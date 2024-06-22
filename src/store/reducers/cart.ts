@@ -18,9 +18,6 @@ const cartSlice = createSlice({
     add: (state, action: PayloadAction<Efood>) => {
       state.items.push(action.payload)
     },
-    // remove: (state, action: PayloadAction<number>) => {
-    //   state.items = state.items.filter((item) => item.id !== action.payload)
-    // },
     remove: (state, action: PayloadAction<number>) => {
       state.items = state.items
         .map((item) => ({
