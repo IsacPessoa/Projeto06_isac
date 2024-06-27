@@ -24,16 +24,10 @@ const Products = () => {
     return <h3>Carregando...</h3>
   }
 
-  // useEffect(() => {
-  //   fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-  //     .then((res) => res.json())
-  //     .then((res) => setRestaurantes(res))
-  // }, [])
-
   return (
     <>
       <Header type="secondary" />
-      <Banner />
+      <Banner efood={prato ? [prato] : []} />
       <div className="container">
         <ProductList type="secondary" efood={prato ? [prato] : []} />
       </div>

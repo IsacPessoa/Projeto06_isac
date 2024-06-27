@@ -1,14 +1,27 @@
 import { Image, Subtitle, Title } from './styles'
 
-import bannerBackground from '../../assets/images/banner.png'
+import { Efood } from '../../Pages/Home'
 
-const Banner = () => (
-  <Image style={{ backgroundImage: `url(${bannerBackground})` }}>
-    <div className="container">
-      <Subtitle>Italiana</Subtitle>
-      <Title>La Dolce Vita Trattoria</Title>
+export type Props = {
+  efood: Efood[]
+}
+
+const Banner = ({ efood = [] }: Props) => {
+  return (
+    <div>
+      {efood.map((efoodItem) => (
+        <Image
+          key={efoodItem.capa}
+          style={{ backgroundImage: `url(${efoodItem.capa})` }}
+        >
+          <div className="container">
+            <Subtitle>{efoodItem.tipo}</Subtitle>
+            <Title>{efoodItem.titulo}</Title>
+          </div>
+        </Image>
+      ))}
     </div>
-  </Image>
-)
+  )
+}
 
 export default Banner

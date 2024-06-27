@@ -10,6 +10,7 @@ export const Image = styled.div`
   color: ${colors.white};
   padding-top: 25px;
   padding-bottom: 32px;
+  object-fit: cover;
 `
 
 export const Subtitle = styled.h3`
