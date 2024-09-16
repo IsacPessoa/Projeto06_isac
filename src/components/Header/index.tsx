@@ -27,7 +27,9 @@ const Header = ({ type }: Props) => {
   if (type === 'first') {
     return (
       <HeaderBar>
-        <Image src={logo} alt="efood" />
+        <Image href="/">
+          <img src={logo} alt="efood" />
+        </Image>
         <Title>
           Viva experiências gastronômicas <br /> no conforto da sua casa
         </Title>
@@ -38,8 +40,10 @@ const Header = ({ type }: Props) => {
   return (
     <HeaderBarSecondary>
       <div className="container">
-        <p>Restaurantes</p>
-        <ImageSecondary src={logo} alt="efood" />
+        <a href="/">Restaurantes</a>
+        <ImageSecondary href="/">
+          <img src={logo} alt="efood" />
+        </ImageSecondary>
         <p onClick={openCart}>{items.length} - Produto(s) no carrinho</p>
       </div>
     </HeaderBarSecondary>

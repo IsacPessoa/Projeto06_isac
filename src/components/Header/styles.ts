@@ -26,6 +26,7 @@ export const HeaderBarSecondary = styled.header`
   font-weight: 900;
   align-items: center;
   display: flex;
+  text-decoration: none;
 
   div {
     display: flex;
@@ -34,17 +35,18 @@ export const HeaderBarSecondary = styled.header`
     margin-top: ;
   }
 
-  p {
+  a {
     cursor: pointer;
+    color: ${colors.firstOrange};
   }
 `
 
-export const Image = styled.img`
+export const Image = styled.a`
   position: absolute;
   margin-bottom: 260px;
 `
 
-export const ImageSecondary = styled.img`
+export const ImageSecondary = styled.a`
   margin-left: 24px;
   cursor: pointer;
 `
