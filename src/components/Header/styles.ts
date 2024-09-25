@@ -35,6 +35,10 @@ export const HeaderBarSecondary = styled.header`
     margin-top: ;
   }
 
+  p {
+    cursor: pointer;
+  }
+
   a {
     cursor: pointer;
     color: ${colors.firstOrange};

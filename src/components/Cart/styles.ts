@@ -40,15 +40,21 @@ export const Sidebar = styled.aside`
   ${ButtonContainer} {
     max-width: 100%;
     width: 100%;
+    cursor: pointer;
   }
 
   p {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 400;
     margin-top: 40px;
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
+  }
+
+  h3,
+  h2 {
+    font-size: 16px;
   }
 `
 
@@ -90,5 +96,44 @@ export const CartItem = styled.li`
     right: 0;
     margin-bottom: 8px;
     margin-right: 8px;
+  }
+`
+export const Row = styled.div``
+
+export const ButtonGroup = styled.div`
+  margin-top: 16px;
+
+  ${ButtonContainer} {
+    margin-top: 8px;
+    background-color: ${colors.beige};
+    padding: 4px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+`
+
+export const InputGroup = styled.div`
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: bold;
+
+  &.cep-number {
+    display: flex;
+    gap: 34px;
+  }
+
+  label {
+  }
+
+  input {
+    margin-top: 8px;
+    width: 100%;
+    padding: 8px;
+    background-color: ${colors.beige};
+    border: none;
+  }
+
+  small {
+    color: #ffa500;
   }
 `

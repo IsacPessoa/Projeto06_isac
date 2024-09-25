@@ -6,6 +6,7 @@ import { ButtonContainer } from '../Button/styles'
 export const Card = styled.div`
   position: relative;
   max-width: 472px;
+  height: 398px;
 
   ${TagContainer} {
     margin-right: 8px;
