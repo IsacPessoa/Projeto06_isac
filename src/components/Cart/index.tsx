@@ -16,12 +16,16 @@ import { close, remove } from '../../store/reducers/cart'
 import { useState } from 'react'
 import Card from '../Card'
 import { useFormik } from 'formik'
+import { usePurchaseMutation } from '../../services/api'
+import { validateHeaderName } from 'http'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
 
   const dispatch = useDispatch()
   const [checkout, setCheckout] = useState('checkout')
+
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -34,7 +38,8 @@ const Cart = () => {
       cardNumber: '',
       cardCode: '',
       month: '',
-      year: ''
+      year: '',
+      complement: ''
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -73,7 +78,35 @@ const Cart = () => {
       )
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        delivery: {
+          receiver: values.name,
+          address: {
+            description: values.address,
+            city: values.city,
+            zipCode: values.portalCode,
+            number: values.number,
+            complement: values.complement
+          }
+        },
+        payment: {
+          card: {
+            name: values.cardFullName,
+            number: values.cardNumber,
+            code: values.cardCode,
+            expires: {
+              month: values.month,
+              year: values.year
+            }
+          }
+        },
+        products: [
+          {
+            id: 1,
+            price: 10
+          }
+        ]
+      })
     }
   })
 
@@ -240,7 +273,11 @@ const Cart = () => {
                   </InputGroup>
                   <InputGroup>
                     <label htmlFor="complement">Complemento (opcional)</label>
-                    <input id="complement" type="text" />
+                    <input
+                      id="complement"
+                      type="text"
+                      value={form.values.complement}
+                    />
                   </InputGroup>
                   <ButtonGroup>
                     <Button
@@ -360,7 +397,7 @@ const Cart = () => {
         )}
         {checkout === 'finalization' && (
           <div className="container">
-            <h3>Pedido realizado - order_id</h3>
+            {data ? <h3>Pedido realizado - {data.orderId}</h3> : <h3>Erro</h3>}
             <p>
               Estamos felizes em informar que seu pedido já está em processo de
               preparação e, em breve, será entregue no endereço fornecido
