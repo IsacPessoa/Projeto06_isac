@@ -17,7 +17,8 @@ import { useState } from 'react'
 import Card from '../Card'
 import { useFormik } from 'formik'
 import { usePurchaseMutation } from '../../services/api'
-import { validateHeaderName } from 'http'
+
+import InputMask from 'react-input-mask'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -244,13 +245,14 @@ const Cart = () => {
                   <InputGroup className="cep-number">
                     <div>
                       <label htmlFor="portalCode">CEP</label>
-                      <input
+                      <InputMask
                         id="portalCode"
                         type="text"
                         name="portalCode"
                         value={form.values.portalCode}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="99999-999"
                       />
                       <small>
                         {getErrorMessage('portalCode', form.errors.portalCode)}
@@ -322,13 +324,14 @@ const Cart = () => {
                 <InputGroup className="cep-number">
                   <div>
                     <label htmlFor="cardNumber">Número do cartão</label>
-                    <input
+                    <InputMask
                       id="cardNumber"
                       type="text"
                       name="cardNumber"
                       value={form.values.cardNumber}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="9999 9999 9999 9999"
                     />
                     <small>
                       {getErrorMessage('cardNumber', form.errors.cardNumber)}
@@ -336,13 +339,14 @@ const Cart = () => {
                   </div>
                   <div>
                     <label htmlFor="cardCode">CVV</label>
-                    <input
+                    <InputMask
                       id="cardCode"
                       type="text"
                       name="cardCode"
                       value={form.values.cardCode}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="999"
                     />
                     <small>
                       {getErrorMessage('cardCode', form.errors.cardCode)}
@@ -352,25 +356,27 @@ const Cart = () => {
                 <InputGroup className="cep-number">
                   <div>
                     <label htmlFor="month">Mês de vencimento</label>
-                    <input
+                    <InputMask
                       id="month"
                       type="text"
                       name="month"
                       value={form.values.month}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="99"
                     />
                     <small>{getErrorMessage('month', form.errors.month)}</small>
                   </div>
                   <div>
                     <label htmlFor="year">Ano de vencimento</label>
-                    <input
+                    <InputMask
                       id="year"
                       type="text"
                       name="year"
                       value={form.values.year}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="99"
                     />
                     <small>{getErrorMessage('year', form.errors.year)}</small>
                   </div>
