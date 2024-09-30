@@ -131,9 +131,18 @@ export const InputGroup = styled.div`
     padding: 8px;
     background-color: ${colors.beige};
     border: none;
+
+    &.error {
+      border: 1px solid red;
+    }
   }
 
   small {
     color: #ffa500;
   }
+`
+
+export const TextEmptyCart = styled.p`
+  text-align: center;
+  padding: 8px;
 `

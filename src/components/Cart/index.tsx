@@ -7,7 +7,8 @@ import {
   CartItem,
   Row,
   InputGroup,
-  ButtonGroup
+  ButtonGroup,
+  TextEmptyCart
 } from './styles'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,6 +20,7 @@ import { useFormik } from 'formik'
 import { usePurchaseMutation } from '../../services/api'
 
 import InputMask from 'react-input-mask'
+import { Navigate } from 'react-router-dom'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -141,22 +143,56 @@ const Cart = () => {
     closeCart()
   }
 
-  const goToPaymant = () => {
-    setCheckout('pagamento')
-    form.handleSubmit()
+  const goToPaymant = async () => {
+    const errors = await form.validateForm()
+
+    if (Object.keys(errors).length === 0) {
+      setCheckout('pagamento')
+      form.handleSubmit()
+    } else {
+      form.setTouched({
+        name: true,
+        address: true,
+        city: true,
+        portalCode: true,
+        number: true,
+        cardFullName: true,
+        cardNumber: true,
+        cardCode: true,
+        month: true,
+        year: true
+      })
+    }
   }
 
-  const goToFinalization = () => {
-    setCheckout('finalization')
-    form.handleSubmit()
+  const goToFinalization = async () => {
+    const errors = await form.validateForm()
+
+    if (Object.keys(errors).length === 0) {
+      setCheckout('finalization')
+      form.handleSubmit()
+    } else {
+      form.setTouched({
+        name: true,
+        address: true,
+        city: true,
+        portalCode: true,
+        number: true,
+        cardFullName: true,
+        cardNumber: true,
+        cardCode: true,
+        month: true,
+        year: true
+      })
+    }
   }
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
 
-    if (isTouched && isInvalid) return message
-    return ''
+    return hasError
   }
 
   return (
@@ -165,38 +201,47 @@ const Cart = () => {
       <Sidebar>
         {checkout === 'checkout' && (
           <>
-            <ul>
-              {items.map((item) => (
-                <CartItem key={item.id}>
-                  <img src={item.capa} alt={item.titulo} />
-                  <div>
-                    <h3>{item.titulo}</h3>
-                    {item.cardapio.map((itemCardapio) => (
-                      <span key={itemCardapio.id}>
-                        R$ {itemCardapio.preco}0
-                      </span>
-                    ))}
-                  </div>
-                  {item.cardapio.map((itemCardapio) => (
-                    <button
-                      key={itemCardapio.id}
-                      onClick={() => removeItem(itemCardapio.id)}
-                      type="button"
-                    />
+            {items.length > 0 ? (
+              <>
+                <ul>
+                  {items.map((item) => (
+                    <CartItem key={item.id}>
+                      <img src={item.capa} alt={item.titulo} />
+                      <div>
+                        <h3>{item.titulo}</h3>
+                        {item.cardapio.map((itemCardapio) => (
+                          <span key={itemCardapio.id}>
+                            R$ {itemCardapio.preco}0
+                          </span>
+                        ))}
+                      </div>
+                      {item.cardapio.map((itemCardapio) => (
+                        <button
+                          key={itemCardapio.id}
+                          onClick={() => removeItem(itemCardapio.id)}
+                          type="button"
+                        />
+                      ))}
+                    </CartItem>
                   ))}
-                </CartItem>
-              ))}
-            </ul>
-            <p>
-              Total de <span>R$ {getTotalPrice().toFixed(2)}</span>
-            </p>
-            <Button
-              onClick={goToCheckout}
-              buttonType="button"
-              title="Continuar para a entrega"
-            >
-              Continuar com a entrega
-            </Button>
+                </ul>
+                <p>
+                  Total de <span>R$ {getTotalPrice().toFixed(2)}</span>
+                </p>
+                <Button
+                  onClick={goToCheckout}
+                  buttonType="button"
+                  title="Continuar para a entrega"
+                >
+                  Continuar com a entrega
+                </Button>
+              </>
+            ) : (
+              <TextEmptyCart>
+                O carrinho está vazio, adicione pelo menos um produto para
+                continuar com a compra
+              </TextEmptyCart>
+            )}
           </>
         )}
         {checkout === 'confirmation' && (
@@ -213,8 +258,8 @@ const Cart = () => {
                       value={form.values.name}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('name') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('name', form.errors.name)}</small>
                   </InputGroup>
                   <InputGroup>
                     <label htmlFor="address">Endereço</label>
@@ -225,10 +270,8 @@ const Cart = () => {
                       value={form.values.address}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('address') ? 'error' : ''}
                     />
-                    <small>
-                      {getErrorMessage('address', form.errors.address)}
-                    </small>
                   </InputGroup>
                   <InputGroup>
                     <label htmlFor="city">Cidade</label>
@@ -239,8 +282,8 @@ const Cart = () => {
                       value={form.values.city}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('city') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('city', form.errors.city)}</small>
                   </InputGroup>
                   <InputGroup className="cep-number">
                     <div>
@@ -253,10 +296,10 @@ const Cart = () => {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         mask="99999-999"
+                        className={
+                          checkInputHasError('portalCode') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage('portalCode', form.errors.portalCode)}
-                      </small>
                     </div>
                     <div>
                       <label htmlFor="number">Número</label>
@@ -267,10 +310,8 @@ const Cart = () => {
                         value={form.values.number}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={checkInputHasError('number') ? 'error' : ''}
                       />
-                      <small>
-                        {getErrorMessage('number', form.errors.number)}
-                      </small>
                     </div>
                   </InputGroup>
                   <InputGroup>
@@ -316,10 +357,10 @@ const Cart = () => {
                     value={form.values.cardFullName}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('cardFullName') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage('cardFullName', form.errors.cardFullName)}
-                  </small>
                 </InputGroup>
                 <InputGroup className="cep-number">
                   <div>
@@ -332,10 +373,10 @@ const Cart = () => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       mask="9999 9999 9999 9999"
+                      className={
+                        checkInputHasError('cardNumber') ? 'error' : ''
+                      }
                     />
-                    <small>
-                      {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                    </small>
                   </div>
                   <div>
                     <label htmlFor="cardCode">CVV</label>
@@ -347,10 +388,8 @@ const Cart = () => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       mask="999"
+                      className={checkInputHasError('cardCode') ? 'error' : ''}
                     />
-                    <small>
-                      {getErrorMessage('cardCode', form.errors.cardCode)}
-                    </small>
                   </div>
                 </InputGroup>
                 <InputGroup className="cep-number">
@@ -364,8 +403,8 @@ const Cart = () => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       mask="99"
+                      className={checkInputHasError('month') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('month', form.errors.month)}</small>
                   </div>
                   <div>
                     <label htmlFor="year">Ano de vencimento</label>
@@ -377,8 +416,8 @@ const Cart = () => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       mask="99"
+                      className={checkInputHasError('year') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('year', form.errors.year)}</small>
                   </div>
                 </InputGroup>
                 <ButtonGroup>
@@ -403,7 +442,11 @@ const Cart = () => {
         )}
         {checkout === 'finalization' && (
           <div className="container">
-            {data ? <h3>Pedido realizado - {data.orderId}</h3> : <h3>Erro</h3>}
+            {data ? (
+              <h3>Pedido realizado - {data.orderId}</h3>
+            ) : (
+              <h3>Carregando pedido</h3>
+            )}
             <p>
               Estamos felizes em informar que seu pedido já está em processo de
               preparação e, em breve, será entregue no endereço fornecido
