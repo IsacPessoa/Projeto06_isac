@@ -320,6 +320,8 @@ const Cart = () => {
                       id="complement"
                       type="text"
                       value={form.values.complement}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
                     />
                   </InputGroup>
                   <ButtonGroup>
