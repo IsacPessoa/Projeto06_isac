@@ -3,10 +3,20 @@ import { colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 import { ButtonContainer } from '../Button/styles'
 
+export const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+`
+
 export const Card = styled.div`
+  flex: 1 0 300px;
   position: relative;
   max-width: 472px;
-  height: 398px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
 
   ${TagContainer} {
     margin-right: 8px;
@@ -27,6 +37,9 @@ export const CardSecondary = styled.div`
   border-radius: 12px;
   max-width: 320px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
 
   ${ButtonContainer} {
     background-color: ${colors.beige};
@@ -36,6 +49,7 @@ export const CardSecondary = styled.div`
     height: 24px;
     text-align: center;
     cursor: pointer;
+    border-radius: 3px;
   }
 
   img {
@@ -49,12 +63,14 @@ export const CardSecondary = styled.div`
 export const Title = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
 `
 export const Decription = styled.p`
   font-size: 14px;
   line-height: 22px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
 `
 
 export const AllDescription = styled.div`
@@ -64,6 +80,7 @@ export const AllDescription = styled.div`
   border-style: solid;
   border-color: transparent ${colors.firstOrange} ${colors.firstOrange}
     ${colors.firstOrange};
+  flex-grow: 1;
 `
 
 export const AllDescription2 = styled.div`
@@ -71,6 +88,16 @@ export const AllDescription2 = styled.div`
   padding: 8px 8px;
   width: 100%;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: justify;
+  display: flex; /* Usar Flexbox */
+  flex-grow: 1; /* Permite que este contêiner ocupe o espaço restante */
+
+  ${ButtonContainer} {
+    width: 100%;
+  }
 `
 
 export const Nota = styled.div`

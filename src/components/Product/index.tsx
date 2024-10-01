@@ -12,7 +12,8 @@ import {
   ModalContent,
   ImagePrato,
   Close,
-  AllDescription2
+  AllDescription2,
+  CardContainer
 } from './styles'
 
 import estrela from '../../assets/images/estrela.svg'
@@ -42,30 +43,32 @@ const Product = ({ efood, type }: Props) => {
 
   if (type === 'first' && efood.tipo) {
     return (
-      <Card>
-        <img src={efood.capa} alt={efood.titulo} />
-        <Infos>
-          <Tag key={efood.tipo}>{efood.tipo}</Tag>
-          {efood.destacado && <Tag key="destaque">Destaque</Tag>}
-        </Infos>
-        <AllDescription>
-          <InitialBar>
-            <Title>{efood.titulo}</Title>
-            <Nota>
-              {efood.avaliacao}
-              <img src={estrela} alt="Avaliação" />
-            </Nota>
-          </InitialBar>
-          <Decription>{efood.descricao}</Decription>
-          <Button
-            to={`/pratos/${efood.id}`}
-            buttonType="link"
-            title="Saiba mais"
-          >
-            Saiba mais
-          </Button>
-        </AllDescription>
-      </Card>
+      <CardContainer>
+        <Card>
+          <img src={efood.capa} alt={efood.titulo} />
+          <Infos>
+            <Tag key={efood.tipo}>{efood.tipo}</Tag>
+            {efood.destacado && <Tag key="destaque">Destaque</Tag>}
+          </Infos>
+          <AllDescription>
+            <InitialBar>
+              <Title>{efood.titulo}</Title>
+              <Nota>
+                {efood.avaliacao}
+                <img src={estrela} alt="Avaliação" />
+              </Nota>
+            </InitialBar>
+            <Decription>{efood.descricao}</Decription>
+            <Button
+              to={`/pratos/${efood.id}`}
+              buttonType="link"
+              title="Saiba mais"
+            >
+              Saiba mais
+            </Button>
+          </AllDescription>
+        </Card>
+      </CardContainer>
     )
   }
 
